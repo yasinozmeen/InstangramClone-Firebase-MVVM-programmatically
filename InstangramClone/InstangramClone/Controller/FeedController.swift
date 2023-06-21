@@ -8,10 +8,10 @@
 import UIKit.UIViewController
 
 class FeedController: ViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .green
     }
-    
+
 }

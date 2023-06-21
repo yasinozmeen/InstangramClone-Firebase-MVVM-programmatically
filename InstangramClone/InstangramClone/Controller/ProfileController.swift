@@ -8,10 +8,10 @@
 import UIKit.UIViewController
 
 class ProfileController: ViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
     }
-    
+
 }
