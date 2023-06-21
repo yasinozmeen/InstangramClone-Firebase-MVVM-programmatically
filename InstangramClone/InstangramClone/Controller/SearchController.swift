@@ -8,10 +8,10 @@
 import UIKit.UIViewController
 
 class SearchController: ViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
     }
-    
+
 }

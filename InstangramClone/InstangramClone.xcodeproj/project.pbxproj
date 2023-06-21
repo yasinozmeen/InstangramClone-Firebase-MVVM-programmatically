@@ -10,7 +10,6 @@
 		84F025552A43043500980499 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025542A43043500980499 /* AppDelegate.swift */; };
 		84F025572A43043500980499 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025562A43043500980499 /* SceneDelegate.swift */; };
 		84F025592A43043500980499 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025582A43043500980499 /* ViewController.swift */; };
-		84F0255E2A43043700980499 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F0255D2A43043700980499 /* Assets.xcassets */; };
 		84F025612A43043700980499 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F0255F2A43043700980499 /* LaunchScreen.storyboard */; };
 		84F025702A43053A00980499 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0256F2A43053A00980499 /* MainTabController.swift */; };
 		84F025752A430A0800980499 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025742A430A0800980499 /* FeedController.swift */; };
@@ -18,6 +17,7 @@
 		84F025792A430A2200980499 /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025782A430A2200980499 /* ImageSelectorController.swift */; };
 		84F0257B2A430A2D00980499 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0257A2A430A2D00980499 /* NotificationController.swift */; };
 		84F0257D2A430A3D00980499 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0257C2A430A3D00980499 /* ProfileController.swift */; };
+		84F0257F2A430F9900980499 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F0257E2A430F9900980499 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,6 @@
 		84F025542A43043500980499 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84F025562A43043500980499 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		84F025582A43043500980499 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		84F0255D2A43043700980499 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84F025602A43043700980499 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84F025622A43043700980499 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F0256F2A43053A00980499 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
@@ -34,6 +33,7 @@
 		84F025782A430A2200980499 /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
 		84F0257A2A430A2D00980499 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		84F0257C2A430A3D00980499 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		84F0257E2A430F9900980499 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +73,8 @@
 				84F025692A4304A100980499 /* API */,
 				84F025682A43049A00980499 /* Utils */,
 				84F025582A43043500980499 /* ViewController.swift */,
-				84F025732A4307D200980499 /* Support */,
 				84F025722A4307C800980499 /* Helper */,
+				84F025732A4307D200980499 /* Support */,
 				84F025712A4307C500980499 /* App */,
 			);
 			path = InstangramClone;
@@ -140,7 +140,7 @@
 		84F025722A4307C800980499 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				84F0255D2A43043700980499 /* Assets.xcassets */,
+				84F0257E2A430F9900980499 /* Assets.xcassets */,
 				84F0255F2A43043700980499 /* LaunchScreen.storyboard */,
 			);
 			path = Helper;
@@ -164,6 +164,7 @@
 				84F0254D2A43043500980499 /* Sources */,
 				84F0254E2A43043500980499 /* Frameworks */,
 				84F0254F2A43043500980499 /* Resources */,
+				84F025802A4316C500980499 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -212,12 +213,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F0257F2A430F9900980499 /* Assets.xcassets in Resources */,
 				84F025612A43043700980499 /* LaunchScreen.storyboard in Resources */,
-				84F0255E2A43043700980499 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		84F025802A4316C500980499 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84F0254D2A43043500980499 /* Sources */ = {
