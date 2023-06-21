@@ -9,9 +9,21 @@ import UIKit.UITabBar
 
 class MainTabController: UITabBarController {
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        configureViewController()
     }
     
+    // MARK: - Functions
+    
+    func configureViewController() {
+        let feed = FeedController()
+        let search = SearchController()
+        let selectImage = ImageSelectorController()
+        let notification = NotificationController()
+        let profile = ProfileController()
+        
+        viewControllers = [feed, search, selectImage, notification, profile]
+    }
 }

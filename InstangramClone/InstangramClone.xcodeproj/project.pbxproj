@@ -13,6 +13,11 @@
 		84F0255E2A43043700980499 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F0255D2A43043700980499 /* Assets.xcassets */; };
 		84F025612A43043700980499 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F0255F2A43043700980499 /* LaunchScreen.storyboard */; };
 		84F025702A43053A00980499 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0256F2A43053A00980499 /* MainTabController.swift */; };
+		84F025752A430A0800980499 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025742A430A0800980499 /* FeedController.swift */; };
+		84F025772A430A1500980499 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025762A430A1500980499 /* SearchController.swift */; };
+		84F025792A430A2200980499 /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F025782A430A2200980499 /* ImageSelectorController.swift */; };
+		84F0257B2A430A2D00980499 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0257A2A430A2D00980499 /* NotificationController.swift */; };
+		84F0257D2A430A3D00980499 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0257C2A430A3D00980499 /* ProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		84F025602A43043700980499 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84F025622A43043700980499 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F0256F2A43053A00980499 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		84F025742A430A0800980499 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		84F025762A430A1500980499 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		84F025782A430A2200980499 /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
+		84F0257A2A430A2D00980499 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		84F0257C2A430A3D00980499 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +98,11 @@
 			isa = PBXGroup;
 			children = (
 				84F0256F2A43053A00980499 /* MainTabController.swift */,
+				84F025742A430A0800980499 /* FeedController.swift */,
+				84F025762A430A1500980499 /* SearchController.swift */,
+				84F025782A430A2200980499 /* ImageSelectorController.swift */,
+				84F0257A2A430A2D00980499 /* NotificationController.swift */,
+				84F0257C2A430A3D00980499 /* ProfileController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -210,7 +225,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F025592A43043500980499 /* ViewController.swift in Sources */,
+				84F025792A430A2200980499 /* ImageSelectorController.swift in Sources */,
+				84F0257B2A430A2D00980499 /* NotificationController.swift in Sources */,
+				84F025772A430A1500980499 /* SearchController.swift in Sources */,
 				84F025552A43043500980499 /* AppDelegate.swift in Sources */,
+				84F0257D2A430A3D00980499 /* ProfileController.swift in Sources */,
+				84F025752A430A0800980499 /* FeedController.swift in Sources */,
 				84F025702A43053A00980499 /* MainTabController.swift in Sources */,
 				84F025572A43043500980499 /* SceneDelegate.swift in Sources */,
 			);
@@ -353,7 +373,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q6XS9G2H7P;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = InstangramClone/Info.plist;
+				INFOPLIST_FILE = InstangramClone/Support/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -380,7 +400,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q6XS9G2H7P;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = InstangramClone/Info.plist;
+				INFOPLIST_FILE = InstangramClone/Support/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
