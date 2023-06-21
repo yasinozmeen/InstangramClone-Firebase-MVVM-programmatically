@@ -7,7 +7,7 @@
 
 import UIKit.UIViewController
 
-class ImageSelectorController: ViewController {
+class ImageSelectorController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
