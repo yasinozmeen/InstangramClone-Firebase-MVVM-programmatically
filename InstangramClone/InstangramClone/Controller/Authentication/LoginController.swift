@@ -15,28 +15,12 @@ class LoginController: UIViewController{
         return iv
     }()
     private let emailTextField: UITextField = {
-        let tf = UITextField()
-        tf.borderStyle = .none
-        tf.textColor = .white
-        tf.keyboardAppearance = .dark
-        tf.keyboardType = .emailAddress
-        tf.backgroundColor = UIColor(white: 1, alpha: 0.1)
-        tf.setHeight(50)
-        tf.attributedPlaceholder = NSAttributedString(string: " Email",
-                                                      attributes: [.foregroundColor:UIColor(white: 1, alpha: 0.7)])
+        let tf = CustomTextFieldLoginView(placeholder: "Email")
         return tf
     }()
     private let passwordTextField: UITextField = {
-        let tf = UITextField()
-        tf.borderStyle = .none
-        tf.textColor = .white
-        tf.keyboardAppearance = .dark
-        tf.keyboardType = .default
+        let tf = CustomTextFieldLoginView(placeholder: "Password")
         tf.isSecureTextEntry = true
-        tf.backgroundColor = UIColor(white: 1, alpha: 0.1)
-        tf.setHeight(50)
-        tf.attributedPlaceholder = NSAttributedString(string: " Password",
-                                                      attributes: [.foregroundColor:UIColor(white: 1, alpha: 0.7)])
         return tf
     }()
     private let loginButton: UIButton = {
@@ -48,30 +32,26 @@ class LoginController: UIViewController{
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         return button
     }()
-    private let dontHaveAccountButton: UIButton = {
-        let button = UIButton(type: .system)
-        let atts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.7),.font:UIFont.systemFont(ofSize: 16)]
-        let attributesTitle = NSMutableAttributedString(string: "Dont't have an account? ", attributes: atts)
-        
-        let boldAtts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.7),.font:UIFont.boldSystemFont(ofSize: 16)]
-        attributesTitle.append(NSMutableAttributedString(string: "Sign Up", attributes: boldAtts))
-        button.setAttributedTitle(attributesTitle, for: .normal)
-        return button
-    }()
     private let forgotPasswordButton: UIButton = {
         let button = UIButton(type: .system)
-        let atts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.7),.font:UIFont.systemFont(ofSize: 16)]
-        let attributesTitle = NSMutableAttributedString(string: "Forgot you password? ", attributes: atts)
-        
-        let boldAtts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.7),.font:UIFont.boldSystemFont(ofSize: 16)]
-        attributesTitle.append(NSMutableAttributedString(string: "Get help signing in.", attributes: boldAtts))
-        button.setAttributedTitle(attributesTitle, for: .normal)
+        button.attributedTitle(firstPart: "Forgot yor password?  ", secondPart: "Get help signing in.")
+        return button
+    }()
+    private lazy var dontHaveAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.attributedTitle(firstPart: "Dont't have an account?  ", secondPart: "Sign Up")
+        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
     }()
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+    // MARK: - Actions
+    @objc func handleShowSignUp() {
+        let controller = RegistrationController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - Functions
@@ -88,11 +68,12 @@ class LoginController: UIViewController{
         navigationController?.navigationBar.barStyle = .black
     }
     func setupGradient() {
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
-        gradient.locations = [0, 1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
+//        let gradient = CAGradientLayer()
+//        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
+//        gradient.locations = [0, 1]
+//        view.layer.addSublayer(gradient)
+//        gradient.frame = view.frame
+        configureGradientLayer()
     }
     func setupIconImageView() {
         view.addSubview(iconImage)
