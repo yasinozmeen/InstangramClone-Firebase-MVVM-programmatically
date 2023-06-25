@@ -8,6 +8,9 @@
 import UIKit
 
 class LoginController: UIViewController{
+    // MARK: - Properties
+    private var viewModel = LoginViewModel()
+    
     // MARK: - UI Elements
     private let iconImage: UIImageView = {
         let iv = UIImageView(image: #imageLiteral(resourceName: "Instagram_logo_white"))
@@ -20,16 +23,18 @@ class LoginController: UIViewController{
     }()
     private let passwordTextField: UITextField = {
         let tf = CustomTextFieldLoginView(placeholder: "Password")
-        tf.isSecureTextEntry = true
+        tf.isSecureTextEntry = false
         return tf
     }()
     private let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log In", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
         button.layer.cornerRadius = 5
         button.setHeight(50)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.titleLabel?.textColor = UIColor(white: 1, alpha: 0.67)
+        button.isEnabled = false
         return button
     }()
     private let forgotPasswordButton: UIButton = {
@@ -62,19 +67,16 @@ class LoginController: UIViewController{
         setupIconImageView()
         setupTextFieldAndStackView()
         setupDontHaveAnAcount()
+        configuratNotificationObserver()
     }
     func setupNavigationBar() {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
     }
     func setupGradient() {
-//        let gradient = CAGradientLayer()
-//        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
-//        gradient.locations = [0, 1]
-//        view.layer.addSublayer(gradient)
-//        gradient.frame = view.frame
         configureGradientLayer()
     }
+    
     func setupIconImageView() {
         view.addSubview(iconImage)
         
@@ -99,5 +101,21 @@ class LoginController: UIViewController{
         
         dontHaveAccountButton.centerX(inView: view)
         dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
+    }
+    func configuratNotificationObserver() {
+        emailTextField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+    }
+    
+    // MARK: - Action
+    @objc func textDidChange(_ sender: UITextField){
+        if sender == emailTextField{
+            viewModel.email = sender.text
+        } else {
+            viewModel.password = sender.text
+        }
+        loginButton.backgroundColor = viewModel.buttonBackGroundColor
+        loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        loginButton.isEnabled = viewModel.formIsValid
     }
 }
