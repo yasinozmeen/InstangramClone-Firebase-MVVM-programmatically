@@ -7,6 +7,9 @@
 import UIKit
 
 class RegistrationController: UIViewController{
+    // MARK: - Propetries
+    private var viewModel = RegistrationViewModel()
+    
     // MARK: - UI Elements
     private let pulshPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -14,26 +17,20 @@ class RegistrationController: UIViewController{
         button.setImage(image, for: .normal)
         return button
     }()
-    private let emailTextField: UITextField = {
-        let tf = CustomTextFieldLoginView(placeholder: "Email")
-        return tf
-    }()
-    private let passwordTextField: UITextField = {
-        let tf = CustomTextFieldLoginView(placeholder: "Password")
-        tf.isSecureTextEntry = true
-        return tf
-    }()
+    private let emailTextField = CustomTextFieldLoginView(placeholder: "Email")
+    private let passwordTextField = CustomTextFieldLoginView(placeholder: "Password")
+    private let fullnameTextField = CustomTextFieldLoginView(placeholder: "Fullname")
+    private let usernameTextField = CustomTextFieldLoginView(placeholder: "Username")
     private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
         button.layer.cornerRadius = 5
         button.setHeight(50)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.isEnabled = false
         return button
     }()
-    private let fullnameTextField = CustomTextFieldLoginView(placeholder: "Fullname")
-    private let usernameTextField = CustomTextFieldLoginView(placeholder: "Username")
     
     private lazy var alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
@@ -41,6 +38,7 @@ class RegistrationController: UIViewController{
         button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
         return button
     }()
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,18 +46,46 @@ class RegistrationController: UIViewController{
         configureUI()
     }
     
-    // MARK: - Actions
-    @objc func handleShowLogin() {
-        navigationController?.popViewController(animated: true)
-    }
     // MARK: - Functions
     func configureUI() {
         configureGradientLayer()
         setupPulshPhotoButton()
         setupTextFieldAndStackView()
         setupAlreadyAccount()
+        configuratNotificationObserver()
     }
     
+    // MARK: - Actions
+    @objc func handleShowLogin() {
+        navigationController?.popViewController(animated: true)
+    }
+    @objc func textDidChange(_ sender: UITextField){
+        switch sender {
+        case emailTextField:
+            viewModel.email = sender.text
+        case passwordTextField:
+            viewModel.password = sender.text
+        case fullnameTextField:
+            viewModel.fullname = sender.text
+        case usernameTextField:
+            viewModel.username = sender.text
+        default:
+            print("Wrong TextField")
+        }
+        uptadeForm()
+    }
+}
+// MARK: - FormViewModel
+extension RegistrationController: FormViewModel {
+    func uptadeForm() {
+        signUpButton.backgroundColor = viewModel.buttonBackgroundColor
+        signUpButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        signUpButton.isEnabled = viewModel.formIsValid
+    }
+}
+
+// MARK: - UI Functions
+extension RegistrationController{
     func setupPulshPhotoButton() {
         view.addSubview(pulshPhotoButton)
         
@@ -68,6 +94,7 @@ class RegistrationController: UIViewController{
         pulshPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor,
         paddingTop: 32)
     }
+    
     func setupTextFieldAndStackView() {
         let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, fullnameTextField, usernameTextField, signUpButton])
         stack.axis = .vertical
@@ -80,9 +107,17 @@ class RegistrationController: UIViewController{
                      paddingLeft: 32,
                      paddingRight: 32)
     }
+    
     func setupAlreadyAccount() {
         view.addSubview(alreadyHaveAccountButton)
         alreadyHaveAccountButton.centerX(inView: view)
         alreadyHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
+    }
+    
+    func configuratNotificationObserver() {
+        emailTextField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+        fullnameTextField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
     }
 }

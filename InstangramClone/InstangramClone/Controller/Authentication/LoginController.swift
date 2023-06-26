@@ -48,15 +48,11 @@ class LoginController: UIViewController{
         button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
     }()
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-    }
-    // MARK: - Actions
-    @objc func handleShowSignUp() {
-        let controller = RegistrationController()
-        navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - Functions
@@ -107,14 +103,25 @@ class LoginController: UIViewController{
         passwordTextField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
     }
     
-    // MARK: - Action
+    // MARK: - Actions
+    @objc func handleShowSignUp() {
+        let controller = RegistrationController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
     @objc func textDidChange(_ sender: UITextField){
         if sender == emailTextField{
             viewModel.email = sender.text
         } else {
             viewModel.password = sender.text
         }
-        loginButton.backgroundColor = viewModel.buttonBackGroundColor
+        uptadeForm()
+    }
+}
+
+// MARK: - FormViewModel
+extension LoginController: FormViewModel {
+    func uptadeForm() {
+        loginButton.backgroundColor = viewModel.buttonBackgroundColor
         loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
         loginButton.isEnabled = viewModel.formIsValid
     }
