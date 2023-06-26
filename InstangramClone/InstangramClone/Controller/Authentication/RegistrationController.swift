@@ -11,10 +11,11 @@ class RegistrationController: UIViewController{
     private var viewModel = RegistrationViewModel()
     
     // MARK: - UI Elements
-    private let pulshPhotoButton: UIButton = {
+    private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         let image = #imageLiteral(resourceName: "plus_photo")
         button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(handlePickingPhoto), for: .touchUpInside)
         return button
     }()
     private let emailTextField = CustomTextFieldLoginView(placeholder: "Email")
@@ -74,7 +75,14 @@ class RegistrationController: UIViewController{
         }
         uptadeForm()
     }
+    @objc func handlePickingPhoto() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true)
+    }
 }
+
 // MARK: - FormViewModel
 extension RegistrationController: FormViewModel {
     func uptadeForm() {
@@ -84,14 +92,28 @@ extension RegistrationController: FormViewModel {
     }
 }
 
+// MARK: - UIImagePickerDelegate
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = info[.editedImage] as? UIImage else {return}
+        
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.layer.borderColor = UIColor.white.cgColor
+        plusPhotoButton.layer.borderWidth = 2
+        plusPhotoButton.setImage(selectedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        self.dismiss(animated: true)
+    }
+}
 // MARK: - UI Functions
 extension RegistrationController{
     func setupPulshPhotoButton() {
-        view.addSubview(pulshPhotoButton)
+        view.addSubview(plusPhotoButton)
         
-        pulshPhotoButton.centerX(inView: view)
-        pulshPhotoButton.setDimensions(height: 140, width: 140)
-        pulshPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+        plusPhotoButton.centerX(inView: view)
+        plusPhotoButton.setDimensions(height: 140, width: 140)
+        plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor,
         paddingTop: 32)
     }
     
@@ -100,7 +122,7 @@ extension RegistrationController{
         stack.axis = .vertical
         stack.spacing = 20
         view.addSubview(stack)
-        stack.anchor(top: pulshPhotoButton.bottomAnchor,
+        stack.anchor(top: plusPhotoButton.bottomAnchor,
                      left: view.leftAnchor,
                      right: view.rightAnchor,
                      paddingTop: 32,
