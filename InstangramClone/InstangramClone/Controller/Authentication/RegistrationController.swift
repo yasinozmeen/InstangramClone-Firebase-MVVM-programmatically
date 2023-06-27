@@ -9,9 +9,10 @@ import UIKit
 class RegistrationController: UIViewController{
     // MARK: - Propetries
     private var viewModel = RegistrationViewModel()
+    var profileImage : UIImage?
     
     // MARK: - UI Elements
-    private let plusPhotoButton: UIButton = {
+    private lazy var plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         let image = #imageLiteral(resourceName: "plus_photo")
         button.setImage(image, for: .normal)
@@ -22,7 +23,7 @@ class RegistrationController: UIViewController{
     private let passwordTextField = CustomTextFieldLoginView(placeholder: "Password")
     private let fullnameTextField = CustomTextFieldLoginView(placeholder: "Fullname")
     private let usernameTextField = CustomTextFieldLoginView(placeholder: "Username")
-    private let signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
@@ -30,6 +31,7 @@ class RegistrationController: UIViewController{
         button.setHeight(50)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.isEnabled = false
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -81,6 +83,22 @@ class RegistrationController: UIViewController{
         picker.allowsEditing = true
         present(picker, animated: true)
     }
+    @objc func handleSignUp() {
+        guard let email = emailTextField.text else { return }
+        guard let pasword = passwordTextField.text else { return }
+        guard let fullName = fullnameTextField.text else { return }
+        guard let userName = usernameTextField.text else { return }
+        guard let profileImage = self.profileImage else { return }
+        
+        let credantials = AuthCredentials(email: email,
+                                          password: pasword,
+                                          fullname: fullName,
+                                          username: userName,
+                                          profileImage: profileImage)
+        
+        AuthService.register(withCredential: credantials)
+        
+    }
 }
 
 // MARK: - FormViewModel
@@ -102,7 +120,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         plusPhotoButton.layer.borderColor = UIColor.white.cgColor
         plusPhotoButton.layer.borderWidth = 2
         plusPhotoButton.setImage(selectedImage.withRenderingMode(.alwaysOriginal), for: .normal)
-        
+        self.profileImage = selectedImage
         self.dismiss(animated: true)
     }
 }
@@ -114,7 +132,7 @@ extension RegistrationController{
         plusPhotoButton.centerX(inView: view)
         plusPhotoButton.setDimensions(height: 140, width: 140)
         plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor,
-        paddingTop: 32)
+                               paddingTop: 32)
     }
     
     func setupTextFieldAndStackView() {
