@@ -26,7 +26,7 @@ class LoginController: UIViewController{
         tf.isSecureTextEntry = false
         return tf
     }()
-    private let loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log In", for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
@@ -35,6 +35,7 @@ class LoginController: UIViewController{
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.titleLabel?.textColor = UIColor(white: 1, alpha: 0.67)
         button.isEnabled = false
+        button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
         return button
     }()
     private let forgotPasswordButton: UIButton = {
@@ -107,6 +108,17 @@ class LoginController: UIViewController{
     @objc func handleShowSignUp() {
         let controller = RegistrationController()
         navigationController?.pushViewController(controller, animated: true)
+    }
+    @objc func handleShowLogin() {
+        guard let email = emailTextField.text else { return }
+        guard let pasword = passwordTextField.text else { return }
+        AuthService.logUserIn(email: email, password: pasword) { result, error in
+            if let error = error {
+                print("DEBUG: Failed to log user in \(error.localizedDescription)")
+                return
+            }
+            self.dismiss(animated: true)
+        }
     }
     @objc func textDidChange(_ sender: UITextField){
         if sender == emailTextField{
