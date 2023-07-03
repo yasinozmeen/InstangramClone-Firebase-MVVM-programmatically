@@ -87,7 +87,7 @@ class RegistrationController: UIViewController{
         guard let email = emailTextField.text else { return }
         guard let pasword = passwordTextField.text else { return }
         guard let fullName = fullnameTextField.text else { return }
-        guard let userName = usernameTextField.text else { return }
+        guard let userName = usernameTextField.text?.lowercased() else { return }
         guard let profileImage = self.profileImage else { return }
         
         let credantials = AuthCredentials(email: email,
@@ -96,7 +96,12 @@ class RegistrationController: UIViewController{
                                           username: userName,
                                           profileImage: profileImage)
         
-        AuthService.register(withCredential: credantials)
+        AuthService.register(withCredential: credantials) { error in
+            if let error = error {
+                print("DEBUG: Failed to register user \(error.localizedDescription)")
+                return
+            }
+        }
         
     }
 }
